@@ -1,13 +1,31 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useCallback } from 'react';
+import { Layout } from '@/components/layout/Layout';
+import { ParticleIntro } from '@/components/ParticleIntro';
+import { Hero } from '@/components/sections/Hero';
+import { WhyEngleo } from '@/components/sections/WhyEngleo';
+import { CoursesPreview } from '@/components/sections/CoursesPreview';
+import { Testimonials } from '@/components/sections/Testimonials';
+import { CTASection } from '@/components/sections/CTASection';
 
 const Index = () => {
+  const [showIntro, setShowIntro] = useState(true);
+
+  const handleIntroComplete = useCallback(() => {
+    setShowIntro(false);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      {showIntro && <ParticleIntro onComplete={handleIntroComplete} />}
+      
+      <Layout>
+        <Hero />
+        <WhyEngleo />
+        <CoursesPreview />
+        <Testimonials />
+        <CTASection />
+      </Layout>
+    </>
   );
 };
 
